@@ -104,7 +104,7 @@ export default class IndexPage extends Component{
                     }
                 }  
             }); 
-        }, 200)
+        }, 1000)
 
     }
     render(){

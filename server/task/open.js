@@ -6,21 +6,21 @@ const diff = require('./diff');
 
 async function createPage(viewPort, userinfo, hotelName){
 	const browser = await puppeteer.launch({ 
-		//executablePath: '/Users/Charles/Desktop/temp/chrome-mac/Chromium.app/Contents/MacOS/Chromium',
+		// executablePath: '/Users/Charles/Desktop/temp/chrome-mac/Chromium.app/Contents/MacOS/Chromium',
 		executablePath: '/mnt/chrome-linux/chrome',
 		headless: true,
 		args: ['--no-sandbox', '--disable-setuid-sandbox']
 	});
 	const page = await browser.newPage();
   
-	const userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'
+	const userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3704.0 Safari/537.36'
 	console.log('[viewPort]', viewPort);
 	await page.setViewport(viewPort);
 	await page.setUserAgent(userAgent);
-	await page.setDefaultNavigationTimeout(30000 * 10)
+	// await page.setDefaultNavigationTimeout(30000 * 10)
 
 	console.log('[login]', 'start');
-	await page.goto('http://www.brandwisdom.cn/index.php?c=content&a=lo');
+	await page.goto('http://dv-officiel.brandwisdom.cn/index.php?c=content&a=lo');
 
 	await page.click('#txtUserName');
 	await page.type('#txtUserName', userinfo.username, {delay: 200});
@@ -29,30 +29,33 @@ async function createPage(viewPort, userinfo, hotelName){
 	await page.click('.login-button button', {delay:1000});
 	console.log('[login]', 'success');
 	await page.waitForNavigation({
-		waitUntil: 'load'
+		waitUntil: 'networkidle2'
 	});
-	await page.waitFor(3000);
+
 	if(hotelName){
-		console.log('[switchhotel]', 'start');
-		await page.click('#header_chosen_hotel_chosen');
-		const selectedIndex = await page.evaluate((hotelName) => {
-			const links = [...document.querySelectorAll('.chosen-results li')];
-			let i;
-			links.forEach((el, index) => {
+		console.log('[switchhotel]', 'start', hotelName);
+		const value = await page.evaluate((hotelName) => {
+			$('.bi-wrap-bg-menu').hide();
+			const links = [...document.querySelectorAll('#header-chosen-hotel option')];
+			let value;
+			links.forEach((el) => {
 				const text = el.innerText;
+				console.log(text, el.value, hotelName)
 				if(text === hotelName){
-					i = index;
+					value = el.value;
 				}
 			})
-			return i;
+			return value;
 		}, hotelName);
+		console.log('[switchhotel]', value);
+		
 		// 如果酒店id不存在就不管了
-		if(typeof selectedIndex !== 'undefined'){
-			await page.click(`.chosen-results li[data-option-array-index=${selectedIndex}]`);
-			await page.waitForNavigation({
-				waitUntil: 'load'
+		if(typeof value !== 'undefined'){
+			await page.goto(`http://dv-www.brandwisdom.cn/HotelSel/index?RootVHotelID=${value}`, {
+				waitUtil: 'networkidle2'
 			});
 		}
+		console.log('[switchhotel]', 'end');
 	}
 	
 	return {page, browser};
