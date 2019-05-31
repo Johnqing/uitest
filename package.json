@@ -12,11 +12,12 @@
     "koa-static": "^5.0.0",
     "koa-views": "^6.2.0",
     "mysql": "github:mysqljs/mysql",
-    "puppeteer": "^1.17.0",
     "puppeteer-cn": "^0.1.8",
     "resemblejs": "^3.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "puppeteer": "^1.17.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
