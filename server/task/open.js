@@ -6,8 +6,8 @@ const diff = require('./diff');
 
 async function createPage(viewPort, userinfo, hotelName){
 	const browser = await puppeteer.launch({ 
-//		executablePath: '/Users/Charles/Desktop/temp/chrome-mac/Chromium.app/Contents/MacOS/Chromium',
-		executablePath: '/mnt/chrome-linux/chrome',
+		executablePath: '/Users/Charles/Desktop/temp/chrome-mac/Chromium.app/Contents/MacOS/Chromium',
+		// executablePath: '/mnt/chrome-linux/chrome',
 		headless: true,
 		args: ['--no-sandbox', '--disable-setuid-sandbox']
 	});

@@ -144,7 +144,7 @@ export default class IndexPage extends Component{
                         </Form.Item>
                         <h5>测试容器相关设置</h5>
                         <Form.Item name="viewport_width">
-                            <Form.Field name="viewport_width" tagName="input" size="large" placeholder="视窗宽度" />
+                            <Form.Field value="1366" name="viewport_width" tagName="input" size="large" placeholder="视窗宽度" />
                         </Form.Item>
                         <h5>系统相关的设置</h5>
                         <Form.Item name="jump_url">
@@ -170,7 +170,7 @@ export default class IndexPage extends Component{
                                 size="large"
                                 type="primary"
                             >
-                                登录
+                                开始测试
                             </Button>
                         </Form.Item>
                     </Form>
