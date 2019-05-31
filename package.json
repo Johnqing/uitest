@@ -1,0 +1,25 @@
+{
+  "name": "uitest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "koa": "^2.7.0",
+    "koa-body": "^4.1.0",
+    "koa-busboy": "^1.2.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "koa-views": "^6.2.0",
+    "mysql": "github:mysqljs/mysql",
+    "puppeteer": "^1.17.0",
+    "puppeteer-cn": "^0.1.8",
+    "resemblejs": "^3.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
