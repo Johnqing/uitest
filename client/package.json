@@ -5,7 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "classnames": "^2.2.6",
-    "lodash.merge": "^4.6.1",
+    "lodash.merge": "^4.6.2",
     "raf": "^3.4.1",
     "react": "^16.6.0",
     "react-beautiful-dnd": "6.0.1",
